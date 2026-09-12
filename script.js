@@ -160,7 +160,7 @@ function confirmPayment(){
 /* ===== ADMIN LOGIN (via API) ===== */
 function openAdminLogin(){
   document.getElementById("adminPassword").value="";
-  const u=document.getElementById("adminUsername"); if(u) u.value="";
+  const u=document.getElementById("adminUsername"); if(u) u.value="admin";
   document.getElementById("adminError").textContent="";
   modal("adminLoginModal");
 }
@@ -370,11 +370,10 @@ const transitionEl = document.getElementById("pageTransition");
 const rippleLayer = document.getElementById("clickRipples");
 
 function playTransition(){
-  if(!transitionEl) return;
   transitionEl.classList.remove("active");
   void transitionEl.offsetWidth;
   transitionEl.classList.add("active");
-  window.setTimeout(()=>transitionEl.classList.remove("active"),700);
+  setTimeout(()=>transitionEl.classList.remove("active"),700);
 }
 
 document.addEventListener("click", (e)=>{
@@ -384,7 +383,6 @@ document.addEventListener("click", (e)=>{
   ripple.className = "click-ripple";
   ripple.style.left = e.clientX + "px";
   ripple.style.top = e.clientY + "px";
-  if(!rippleLayer) return;
   rippleLayer.appendChild(ripple);
   setTimeout(()=>ripple.remove(),700);
 });
@@ -393,28 +391,14 @@ const originalGoToStore = goToStore;
 const starLoader = document.getElementById("starLoader");
 const prefersReducedMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 const STAR_LOADER_MS = prefersReducedMotion ? 200 : 3000;
-let storeOpening = false;
 
 goToStore = function(){
-  // Prevent double taps/clicks from stacking multiple transition timers.
-  if(storeOpening || document.getElementById("slide2")?.classList.contains("show")) return;
-  storeOpening = true;
-  const intro = document.getElementById("slide1");
-  if(intro) intro.style.pointerEvents = "none";
-
   playTransition();
-  if(!starLoader){
-    window.setTimeout(()=>{ originalGoToStore(); },160);
-    return;
-  }
-
+  if(!starLoader){ setTimeout(originalGoToStore,160); return; }
   starLoader.classList.add("show");
-  window.setTimeout(()=>{
+  setTimeout(()=>{
     originalGoToStore();
-    window.setTimeout(()=>{
-      starLoader.classList.remove("show");
-      storeOpening = false;
-    },350);
+    setTimeout(()=>{ starLoader.classList.remove("show"); },250);
   },STAR_LOADER_MS);
 };
 
@@ -505,7 +489,4 @@ function toggleTheme(){
 }
 
 (function initTheme(){
-  const saved = localStorage.getItem("ndrex_theme");
-  const theme = saved === "light" ? "light" : "dark";
-  setTheme(theme);
-})();
+  con
