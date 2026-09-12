@@ -1,5 +1,5 @@
-import { sql } from "./lib/db.js";
-import { requireAuth } from "./lib/auth.js";
+import { sql } from "./db.js";
+import { requireAuth } from "./auth.js";
 export default async function handler(req,res){
   try{
     const u=await requireAuth(req,["admin","reseller"]);
