@@ -1,11 +1,33 @@
 {
   "version": 2,
   "builds": [
-    {"src":"api/**/*.js","use":"@vercel/node"},
-    {"src":"frontend/**","use":"@vercel/static"}
+    { "src": "login.js", "use": "@vercel/node" },
+    { "src": "products.js", "use": "@vercel/node" },
+    { "src": "reseller-access.js", "use": "@vercel/node" },
+    { "src": "social.js", "use": "@vercel/node" },
+    { "src": "seed.js", "use": "@vercel/node" },
+    { "src": "index.html", "use": "@vercel/static" },
+    { "src": "script.js", "use": "@vercel/static" },
+    { "src": "style.css", "use": "@vercel/static" },
+    { "src": "sw.js", "use": "@vercel/static" },
+    { "src": "manifest.json", "use": "@vercel/static" },
+    { "src": "apple-touch-icon.png", "use": "@vercel/static" },
+    { "src": "icon-192.png", "use": "@vercel/static" },
+    { "src": "icon-512.png", "use": "@vercel/static" },
+    { "src": "icon-512-maskable.png", "use": "@vercel/static" },
+    { "src": "logo-canva.png", "use": "@vercel/static" },
+    { "src": "logo-netflix.jpg", "use": "@vercel/static" },
+    { "src": "hero.mp4", "use": "@vercel/static" },
+    { "src": "hero-light.mp4", "use": "@vercel/static" },
+    { "src": "qris.jpg", "use": "@vercel/static" }
   ],
   "routes": [
-    {"src":"/api/(.*)","dest":"/api/$1"},
-    {"src":"/(.*)","dest":"/frontend/$1"}
+    { "src": "/api/login", "dest": "/login.js" },
+    { "src": "/api/products", "dest": "/products.js" },
+    { "src": "/api/reseller-access", "dest": "/reseller-access.js" },
+    { "src": "/api/social", "dest": "/social.js" },
+    { "src": "/api/seed", "dest": "/seed.js" },
+    { "src": "/", "dest": "/index.html" },
+    { "src": "/(.*)", "dest": "/$1" }
   ]
 }
