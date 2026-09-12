@@ -370,10 +370,11 @@ const transitionEl = document.getElementById("pageTransition");
 const rippleLayer = document.getElementById("clickRipples");
 
 function playTransition(){
+  if(!transitionEl) return;
   transitionEl.classList.remove("active");
   void transitionEl.offsetWidth;
   transitionEl.classList.add("active");
-  setTimeout(()=>transitionEl.classList.remove("active"),700);
+  window.setTimeout(()=>transitionEl.classList.remove("active"),700);
 }
 
 document.addEventListener("click", (e)=>{
@@ -383,6 +384,7 @@ document.addEventListener("click", (e)=>{
   ripple.className = "click-ripple";
   ripple.style.left = e.clientX + "px";
   ripple.style.top = e.clientY + "px";
+  if(!rippleLayer) return;
   rippleLayer.appendChild(ripple);
   setTimeout(()=>ripple.remove(),700);
 });
@@ -391,14 +393,28 @@ const originalGoToStore = goToStore;
 const starLoader = document.getElementById("starLoader");
 const prefersReducedMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 const STAR_LOADER_MS = prefersReducedMotion ? 200 : 3000;
+let storeOpening = false;
 
 goToStore = function(){
+  // Prevent double taps/clicks from stacking multiple transition timers.
+  if(storeOpening || document.getElementById("slide2")?.classList.contains("show")) return;
+  storeOpening = true;
+  const intro = document.getElementById("slide1");
+  if(intro) intro.style.pointerEvents = "none";
+
   playTransition();
-  if(!starLoader){ setTimeout(originalGoToStore,160); return; }
+  if(!starLoader){
+    window.setTimeout(()=>{ originalGoToStore(); },160);
+    return;
+  }
+
   starLoader.classList.add("show");
-  setTimeout(()=>{
+  window.setTimeout(()=>{
     originalGoToStore();
-    setTimeout(()=>{ starLoader.classList.remove("show"); },250);
+    window.setTimeout(()=>{
+      starLoader.classList.remove("show");
+      storeOpening = false;
+    },350);
   },STAR_LOADER_MS);
 };
 
@@ -489,4 +505,7 @@ function toggleTheme(){
 }
 
 (function initTheme(){
-  con
+  const saved = localStorage.getItem("ndrex_theme");
+  const theme = saved === "light" ? "light" : "dark";
+  setTheme(theme);
+})();
