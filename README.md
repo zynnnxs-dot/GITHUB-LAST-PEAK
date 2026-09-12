@@ -26,19 +26,3 @@ Run `schema.sql` once against the database, then call `/api/seed` with header `x
 
 ## Important
 This V1 establishes the secure backend/auth/data layer. The existing frontend still needs to be wired to these API endpoints for a complete end-to-end migration. Do not put production passwords in frontend JavaScript.
-
-
-## 🔐 NDREX ADMIN LOGIN
-
-Kredensial build ini:
-- Username: `admin`
-- Password: `NDREX2026`
-
-### Vercel
-Set Environment Variables:
-- `ADMIN_USERNAME` = `admin`
-- `ADMIN_PASSWORD` = `NDREX2026`
-
-Set pada Production (dan Preview/Development jika diperlukan), lalu redeploy.
-
-> Jangan mengandalkan password yang tertulis di frontend untuk production. Backend memakai `ADMIN_PASSWORD`. File `.env.example` hanya sebagai panduan.

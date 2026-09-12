@@ -160,7 +160,7 @@ function confirmPayment(){
 /* ===== ADMIN LOGIN (via API) ===== */
 function openAdminLogin(){
   document.getElementById("adminPassword").value="";
-  const u=document.getElementById("adminUsername"); if(u) u.value="admin";
+  const u=document.getElementById("adminUsername"); if(u) u.value="";
   document.getElementById("adminError").textContent="";
   modal("adminLoginModal");
 }
@@ -489,4 +489,6 @@ function toggleTheme(){
 }
 
 (function initTheme(){
-  con
+  const savedTheme = localStorage.getItem("ndrex_theme");
+  setTheme(savedTheme === "light" ? "light" : "dark");
+})();
