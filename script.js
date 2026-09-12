@@ -489,6 +489,4 @@ function toggleTheme(){
 }
 
 (function initTheme(){
-  const savedTheme = localStorage.getItem("ndrex_theme");
-  setTheme(savedTheme === "light" ? "light" : "dark");
-})();
+  con

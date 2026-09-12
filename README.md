@@ -26,3 +26,11 @@ Run `schema.sql` once against the database, then call `/api/seed` with header `x
 
 ## Important
 This V1 establishes the secure backend/auth/data layer. The existing frontend still needs to be wired to these API endpoints for a complete end-to-end migration. Do not put production passwords in frontend JavaScript.
+
+
+## Admin login
+Default first-login credentials (when Vercel variables are not set):
+- Username: `admin`
+- Password: `NDREX2026`
+
+For production, set `ADMIN_USERNAME` and `ADMIN_PASSWORD` in Vercel Environment Variables. The login endpoint synchronizes the configured admin password with the database so an old seeded password does not block login.
