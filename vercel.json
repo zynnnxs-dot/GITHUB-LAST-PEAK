@@ -3,6 +3,7 @@
   "builds": [
     { "src": "login.js", "use": "@vercel/node" },
     { "src": "products.js", "use": "@vercel/node" },
+    { "src": "tiers.js", "use": "@vercel/node" },
     { "src": "reseller-access.js", "use": "@vercel/node" },
     { "src": "social.js", "use": "@vercel/node" },
     { "src": "seed.js", "use": "@vercel/node" },
@@ -24,6 +25,7 @@
   "routes": [
     { "src": "/api/login", "dest": "/login.js" },
     { "src": "/api/products", "dest": "/products.js" },
+    { "src": "/api/tiers", "dest": "/tiers.js" },
     { "src": "/api/reseller-access", "dest": "/reseller-access.js" },
     { "src": "/api/social", "dest": "/social.js" },
     { "src": "/api/seed", "dest": "/seed.js" },
