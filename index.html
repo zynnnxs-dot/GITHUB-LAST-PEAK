@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0">
+<title>NDREX PROJECT</title>
+<meta name="description" content="Premium digital products, simple and fast.">
+<meta name="theme-color" content="#03050b">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="NDREX">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon-192.png" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Orbitron:wght@600;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="stars"></div><div id="pageTransition" class="page-transition"><div class="transition-ring"></div></div><div id="clickRipples"></div>
+
+<div id="doorIntro" class="door-intro">
+  <div class="door-panel left"></div>
+  <div class="door-panel right"></div>
+  <div class="door-seam"></div>
+</div>
+
+<section id="slide1" class="intro" onclick="goToStore()">
+  <div class="portal">
+    <div class="portal-ring r1"></div>
+    <div class="portal-core"></div>
+  </div>
+  <div class="intro-content">
+    <div class="eyebrow">DIGITAL STORE</div>
+    <h1 id="typingText"></h1><span class="cursor">|</span>
+    <p>Klik di mana saja untuk masuk</p>
+  </div>
+  <div class="intro-marquee">
+    <div class="marquee-track">
+      <span>NETFLIX</span><span>CANVA</span><span>ALIGHT MOTION</span>
+      <span>NETFLIX</span><span>CANVA</span><span>ALIGHT MOTION</span>
+      <span>NETFLIX</span><span>CANVA</span><span>ALIGHT MOTION</span>
+    </div>
+  </div>
+  <div class="enter-cue"></div>
+</section>
+
+<section id="slide2" class="store">
+  <header class="topbar">
+    <div class="brand">NDREX <span>PROJECT</span></div>
+    <div class="top-actions">
+      <button class="top-btn theme-toggle" id="themeToggleBtn" onclick="toggleTheme()" aria-label="Ganti tema" title="Ganti tema">☼ <span>GANTI TEMA</span></button>
+      <button class="top-btn" onclick="openResellerLogin()" aria-label="Reseller" title="Reseller">RESELLER</button>
+      
+      <button class="top-btn" onclick="openAdminLogin()" aria-label="Admin" title="Admin">ADMIN</button>
+    </div>
+  </header>
+
+  <!-- VIDEO ANIMATION -->
+  <div class="video-hero">
+    <video id="heroVideo" autoplay muted loop playsinline preload="auto">
+      <source id="heroVideoSource" src="hero.mp4" type="video/mp4">
+    </video>
+    <div class="video-overlay"></div>
+    <div class="video-content">
+      <div class="eyebrow">WELCOME TO NDREX</div>
+      <h2>ENTER THE<br><span>DARK NIGHT.</span></h2>
+      <p>Premium digital products, simple access, fast delivery.</p>
+    </div>
+    <div class="video-badge">AUTO PLAY • MUTED</div>
+  </div>
+
+  <main class="store-content">
+    <div class="hero-copy">
+      <div class="eyebrow">OUR PRODUCTS</div>
+      <h2>YOUR DIGITAL<br><span>ACCESS.</span></h2>
+      <p>Premium digital products. Simple access, clear pricing, and fast delivery.</p>
+    </div>
+
+    <div class="product-grid" id="productGrid"></div>
+  </main>
+  <footer>© 2026 NDREX PROJECT — DIGITAL STORE</footer>
+</section>
+
+<div id="tierModal" class="modal">
+  <div class="modal-box">
+    <button class="close" onclick="closeModal()">×</button>
+    <div class="eyebrow">SELECT TIER</div>
+    <h2 id="modalTitle"></h2>
+    <div id="tierList" class="tier-list"></div>
+  </div>
+</div>
+
+
+<div id="orderModal" class="modal">
+  <div class="modal-box order-box">
+    <button class="close" onclick="closeOrder()">×</button>
+    <div class="eyebrow">ORDER SUMMARY</div>
+    <h2>Detail Pesanan</h2>
+    <div class="order-summary">
+      <div class="order-line"><span>Produk</span><b id="orderProduct">-</b></div>
+      <div class="order-line"><span>Tier</span><b id="orderTier">-</b></div>
+      <div class="order-line total"><span>Total</span><b id="orderPrice">-</b></div>
+    </div>
+    <div class="order-trust">
+      <span>✓</span><div><b>Siap dilanjutkan</b><small>Periksa detail sebelum masuk ke pembayaran.</small></div>
+    </div>
+    <button class="main-btn order-next" onclick="continueToPayment()">LANJUTKAN PEMBAYARAN</button>
+  </div>
+</div>
+
+<div id="paymentModal" class="modal">
+  <div class="modal-box">
+    <button class="close" onclick="closePayment()">×</button>
+    <div class="eyebrow">PAYMENT</div><h2>Pembayaran</h2>
+    <div class="payment-card">
+      <label>QRIS</label>
+      <img class="qris-image" src="qris.jpg" alt="QRIS pembayaran NDREX PROJECT">
+    </div>
+    <div class="payment-card">
+      <label>TRANSFER</label>
+      <div class="phone">0857 1855 8667</div>
+      <button class="copy-btn" onclick="copyNumber()">SALIN NOMOR</button>
+      <span id="copyStatus"></span>
+    </div>
+    <div class="confirm-payment">
+      <div class="confirm-title">ACC PEMBAYARAN</div>
+      <p>Klik tombol di bawah untuk konfirmasi pembelian langsung melalui WhatsApp.</p>
+      <button class="wa-btn" onclick="confirmPayment()">KONFIRMASI PEMBELIAN VIA WHATSAPP</button>
+    </div>
+    <p class="note">Setelah transfer, simpan bukti pembayaran dan kirim bukti melalui WhatsApp.</p>
+  </div>
+</div>
+
+<div id="resellerLoginModal" class="modal">
+  <div class="modal-box small">
+    <button class="close" onclick="closeResellerLogin()">×</button>
+    <div class="eyebrow">RESELLER AREA</div><h2>Login Reseller</h2>
+    <input id="resellerPassword" class="admin-input" type="password" placeholder="Password reseller">
+    <button class="main-btn" onclick="loginReseller()">MASUK</button>
+    <div id="resellerError" class="error"></div>
+    <p class="note">Password diberikan admin setelah kamu membeli akses RESELLER.</p>
+  </div>
+</div>
+
+<div id="resellerModal" class="modal">
+  <div class="modal-box">
+    <button class="close" onclick="closeResellerPanel()">×</button>
+    <div class="eyebrow">RESELLER PANEL</div>
+    <h2>Halo, Reseller 👋</h2>
+    <p class="note" style="margin-bottom:14px">Berikut akses link reseller yang diberikan admin. Gunakan link sesuai produk yang kamu miliki dan jangan dibagikan ke luar.</p>
+    <div id="resellerList" class="tier-list"></div>
+  </div>
+</div>
+
+<div id="adminLoginModal" class="modal">
+  <div class="modal-box small">
+    <button class="close" onclick="closeAdminLogin()">×</button>
+    <div class="eyebrow">PRIVATE AREA</div><h2>Admin Login</h2>
+    <input id="adminPassword" class="admin-input" type="password" placeholder="Password admin">
+    <button class="main-btn" onclick="loginAdmin()">MASUK</button>
+    <div id="adminError" class="error"></div>
+  </div>
+</div>
+
+<div id="adminModal" class="modal">
+  <div class="modal-box admin-box">
+    <button class="close" onclick="closeAdmin()">×</button>
+    <div class="eyebrow">DASHBOARD</div>
+    <h2>NDREX ADMIN</h2>
+    <div id="adminProducts"></div>
+    <button type="button" class="add-app-btn" onclick="addNewApp()">+ TAMBAH APLIKASI</button>
+    <div class="admin-section">
+      <div class="admin-app-head" style="margin-bottom:0">
+        <div class="admin-app-fields">
+          <label class="note" style="text-align:left;margin-bottom:8px">PASSWORD PANEL RESELLER</label>
+          <input id="resellerPasswordInput" class="reseller-password-input" placeholder="Password akses reseller" value="">
+        </div>
+      </div>
+    </div>
+    
+<!-- NDREX V27 — social links editor inside Admin -->
+<div class="ndrex-social-settings">
+  <div class="ndrex-social-settings-title">SOSIAL MEDIA</div>
+  <div class="ndrex-social-settings-sub">Atur link yang tampil di popup sosial media.</div>
+  <div class="ndrex-social-grid">
+    <input class="admin-input ndrex-social-url" data-social-index="0" type="url" placeholder="Instagram — https://...">
+    <input class="admin-input ndrex-social-url" data-social-index="1" type="url" placeholder="TikTok — https://...">
+    <input class="admin-input ndrex-social-url" data-social-index="2" type="url" placeholder="WhatsApp — https://...">
+    <input class="admin-input ndrex-social-url" data-social-index="3" type="url" placeholder="Telegram — https://...">
+  </div>
+  <button type="button" class="copy-btn full" id="ndrexSocialSave">SIMPAN LINK</button>
+  <div id="ndrexSocialSaved" class="saved"></div>
+</div>
+
+<button class="main-btn" onclick="saveAdminData()">SIMPAN PERUBAHAN</button>
+    <button class="copy-btn full" onclick="resetAdminData()">RESET DEFAULT</button>
+    <div id="adminSaved" class="saved"></div>
+    <p class="note">Admin demo ini menyimpan data di browser (localStorage). Password demo: <b>ndrex123</b>.</p>
+  </div>
+</div>
+
+<div id="installToast" class="install-toast">
+  <div class="install-icon"><img src="icon-192.png" alt=""></div>
+  <div class="install-text"><b>Pasang NDREX PROJECT</b><span>Akses lebih cepat dari layar utama</span></div>
+  <button class="install-btn" onclick="installApp()">PASANG</button>
+  <button class="install-close" onclick="dismissInstall()">×</button>
+</div>
+
+<div id="starLoader" class="star-loader">
+  <div class="rocket">
+    <div class="rocket-flame"></div>
+    <div class="rocket-body"><div class="rocket-window"></div></div>
+    <div class="rocket-fin left"></div>
+    <div class="rocket-fin right"></div>
+  </div>
+  <div class="star-loader-label">MEMBUKA TOKO<span class="loader-dots"><i></i><i></i><i></i></span></div>
+</div>
+
+<div id="zipperOverlay" class="zipper-overlay">
+  <div class="zip-panel left"></div>
+  <div class="zip-panel right"></div>
+  <div class="zip-teeth"></div>
+  <div class="zip-pull"><span class="zip-pull-loop"></span></div>
+</div>
+
+<script src="script.js"></script></body>
+</html>
