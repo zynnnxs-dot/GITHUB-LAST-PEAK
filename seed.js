@@ -1,5 +1,5 @@
-import { sql } from "./lib/db.js";
-import { hashPassword } from "./lib/auth.js";
+import { sql } from "./db.js";
+import { hashPassword } from "./auth.js";
 export default async function handler(req,res){
   if(req.method!=="POST") return res.status(405).json({error:"POST_ONLY"});
   if(req.headers["x-seed-key"] !== process.env.SEED_KEY) return res.status(403).json({error:"FORBIDDEN"});
